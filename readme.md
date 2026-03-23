@@ -1,8 +1,4 @@
-▶️ Schnellstart
-````
-cd test_orchestrator_service
-python3 -m venv .venv
-source .venv/bin/activate
+▶️ Schnellstart im DevContainer
 
 pip install -r requirements.txt
 
