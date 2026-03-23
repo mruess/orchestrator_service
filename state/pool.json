@@ -1,4 +1,8 @@
 {
-  "win-test-01": {"status": "FREE"},
-  "win-test-02": {"status": "FREE"}
+  "win-test-01": {
+    "status": "FREE"
+  },
+  "win-test-02": {
+    "status": "FREE"
+  }
 }
