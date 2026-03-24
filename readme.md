@@ -1,7 +1,11 @@
 ▶️ Schnellstart im DevContainer
 
+Der Container selbst macht beim PostCreate "pip install -r requirements.txt", deshalb bei Erweiterungen einfach die requirements.txt ändern.
+
+
+Service starten
+
 ```
-pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
