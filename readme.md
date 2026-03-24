@@ -2,6 +2,9 @@
 
 Der Container selbst macht beim PostCreate "pip install -r requirements.txt", deshalb bei Erweiterungen einfach die requirements.txt ändern.
 
+## Setup
+In copilot /setup eingeben. Er fragt nach dem Vault Passwort und startet den Dev-Server. Dieser kann mit den Curl-Kommandos unten angesprochen werden
+
 ## ansible
 Ansible wird bereits mit dem Devcontainer PostCreate installiert, mehr dazu in dem Unterverzeichnis **ansible**
 
