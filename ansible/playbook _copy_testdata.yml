@@ -1,0 +1,5 @@
+- name: Copy Test Data
+  hosts: all
+  gather_facts: no
+  roles:
+    - copy_test_data

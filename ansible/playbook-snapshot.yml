@@ -1,0 +1,5 @@
+- name: Create ready snapshot
+  hosts: all
+  gather_facts: no
+  roles:
+    - snapshot

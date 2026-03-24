@@ -1,0 +1,21 @@
+- name: Ensure temp dir exists
+  ansible.windows.win_file:
+    path: C:\temp
+    state: directory
+
+- name: Clean target folder
+  ansible.windows.win_file:
+    path: z:\nx
+    state: absent
+
+- name: Recreate target folder
+  ansible.windows.win_file:
+    path: z:\nx\z-data
+    state: directory
+
+- name: Testdaten kopieren
+  ansible.windows.win_command: >
+    robocopy f:\Testdaten\z-data z:\nx\z-data /E
+  register: robocopy_result
+  failed_when: robocopy_result.rc >= 8  
+  changed_when: robocopy_result.rc in [1,2,3,5,6,7]

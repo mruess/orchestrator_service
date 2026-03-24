@@ -1,16 +1,39 @@
-▶️ Schnellstart im DevContainer
+# ▶️ Orchestrator im DevContainer
 
 Der Container selbst macht beim PostCreate "pip install -r requirements.txt", deshalb bei Erweiterungen einfach die requirements.txt ändern.
 
+## ansible
+Ansible wird bereits mit dem Devcontainer PostCreate installiert, mehr dazu in dem Unterverzeichnis **ansible**
 
-Service starten
+ansible ignoriert ansible.cfg wenn es Schreibrechte für "other" gibt. Wenn es rum meckert dann rum dass es das vault nicht auf bekommt
+[ERROR]: Attempting to decrypt but no vault secrets found
+
+Dann 
+
+```
+sudo chmod o-w /workspaces/orchestrator_service/ansible
+```
+setzen oder
+
+```
+ansible-playbook -i inventory/ playbook-snapshot.yml --vault-password-file ./vault-pass.sh
+```
+
+Vault Passwort setzten: 
+
+```
+export ANSIBLE_VAULT_PASSWORD=
+```
+
+
+## Service starten
 
 ```
 uvicorn app.main:app --reload
 ```
 
 
-🌐 API testen
+## 🌐 API testen
 
 Start Test
 

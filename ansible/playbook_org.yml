@@ -1,0 +1,18 @@
+- name: Reset VM to clean snapshot
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - vm_reset
+
+- name: Deploy and configure Windows VM
+  hosts: windows
+  gather_facts: no
+  roles:
+    - deploy_build
+    - install_app
+
+- name: Create ready snapshot
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - snapshot

@@ -1,0 +1,8 @@
+- name: Start VM
+  community.proxmox.proxmox_kvm:
+    api_host: "{{ proxmox_host }}"
+    api_user: "{{ proxmox_user }}"
+    api_password: "{{ proxmox_password }}"
+    vmid: "{{ vmid }}"
+    state: started
+  delegate_to: localhost

@@ -1,0 +1,14 @@
+- name: Rollback VM to clean-base snapshot
+  community.general.proxmox_snap:
+    api_host: "{{ proxmox_host }}"
+    api_user: "{{ proxmox_user }}"
+    api_password: "{{ proxmox_password }}"
+    vmid: "{{ vmid }}"
+    snapname: "clean-base"
+    state: rollback
+
+- name: Wait for WinRM
+  wait_for:
+    host: "{{ target_ip }}"
+    port: 5985
+    timeout: 300

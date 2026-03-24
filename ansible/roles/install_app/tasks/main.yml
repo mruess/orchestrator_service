@@ -1,0 +1,5 @@
+- name: Install or update application
+  ansible.windows.win_package:
+    path: "C:\\LegacyApp\\data\\setup.exe"
+    arguments: "/silent /norestart"
+    state: present

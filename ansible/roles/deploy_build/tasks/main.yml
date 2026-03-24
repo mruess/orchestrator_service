@@ -1,0 +1,25 @@
+- name: Ensure temp dir exists
+  ansible.windows.win_file:
+    path: C:\temp
+    state: directory
+
+- name: Upload build artifact
+  ansible.windows.win_copy:
+    src: "{{ build_artifact }}"
+    dest: "C:\\temp\\build.zip"
+
+- name: Clean target folder
+  ansible.windows.win_file:
+    path: C:\LegacyApp\data
+    state: absent
+
+- name: Recreate target folder
+  ansible.windows.win_file:
+    path: C:\LegacyApp\data
+    state: directory
+
+- name: Unzip build
+  ansible.windows.win_unzip:
+    src: "C:\\temp\\build.zip"
+    dest: "C:\\LegacyApp\\data"
+    delete_archive: yes
