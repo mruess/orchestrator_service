@@ -47,3 +47,9 @@ Release VM
 ```
 curl -X POST "http://127.0.0.1:8000/release?vm=win-test-01&mr_id=123"
 ```
+
+Merge Requests abfragen
+
+```
+curl http://127.0.0.1:8000/merge-requests
+```
