@@ -1,5 +1,5 @@
-- name: Copy Test Data
+- name: Start VM
   hosts: all
   gather_facts: no
   roles:
-    - copy_test_data
+    - start_vm

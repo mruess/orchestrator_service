@@ -7,6 +7,7 @@ Ansible wird bereits mit dem Devcontainer PostCreate installiert, mehr dazu in d
 
 ansible ignoriert ansible.cfg wenn es Schreibrechte für "other" gibt. Wenn es rum meckert dann rum dass es das vault nicht auf bekommt
 [ERROR]: Attempting to decrypt but no vault secrets found
+Passiert gerne bei DevContainern
 
 Dann 
 
