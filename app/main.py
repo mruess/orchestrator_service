@@ -11,10 +11,11 @@ def root():
 @app.post("/start-test")
 def start_test(user: str, mr_id: int):
     vm = allocate_vm(user, mr_id)
-    run_playbook(vm, mr_id)
+    run_playbook(vm, mr_id,"ansible/playbook_startvm.yml")
     return {"vm": vm, "status": "DEPLOYING"}
 
 @app.post("/release")
-def release(vm: str):
+def release(vm: str, mr_id: int):
+    run_playbook(vm, mr_id,"ansible/playbook_stopvm.yml")
     release_vm(vm)
     return {"status": "released"}

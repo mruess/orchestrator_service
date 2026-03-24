@@ -1,0 +1,6 @@
+- name: Stop VM
+  hosts: all
+  gather_facts: no
+  roles:
+    - stop_vm
+

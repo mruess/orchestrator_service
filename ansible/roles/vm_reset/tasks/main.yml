@@ -4,11 +4,6 @@
     api_user: "{{ proxmox_user }}"
     api_password: "{{ proxmox_password }}"
     vmid: "{{ vmid }}"
-    snapname: "clean-base"
+    snapname: "{{ start_snapshot }}"
     state: rollback
-
-- name: Wait for WinRM
-  wait_for:
-    host: "{{ target_ip }}"
-    port: 5985
-    timeout: 300
+  delegate_to: localhost
