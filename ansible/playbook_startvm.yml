@@ -1,0 +1,17 @@
+- name: Start VM
+  hosts: all
+  gather_facts: no
+  roles:
+    - start_vm
+
+
+- name: Wait for WinRM
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Wait for WinRM port
+      wait_for:
+        host: "{{ target_ip }}"
+        port: 5985
+        timeout: 300
+      delegate_to: localhost

@@ -3,3 +3,4 @@ uvicorn
 requests
 proxmoxer
 ansible
+pywinrm
