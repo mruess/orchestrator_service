@@ -48,7 +48,7 @@ function App() {
             <tbody>
               {mergeRequests.map((mr) => (
                 <tr key={mr.id} data-id={mr.id}>
-                  <td>{mr.title}</td>
+                  <td><a href={mr.web_url} target="_blank" rel="noopener noreferrer">{mr.title}</a></td>
                   <td><code>{mr.source_branch}</code></td>
                 </tr>
               ))}
