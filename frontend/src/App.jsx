@@ -8,6 +8,26 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const triggerBuild = async (mr) => {
+    try {
+      const res = await fetch(`/api/trigger-build?branch_name=${encodeURIComponent(mr.source_branch)}`, { method: 'POST' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      alert(`Build gestartet für Branch: ${mr.source_branch}`)
+    } catch (err) {
+      alert(`Fehler beim Build: ${err.message}`)
+    }
+  }
+
+  const startTest = async (mr) => {
+    try {
+      const res = await fetch(`/api/start-test?mr_id=${mr.iid}`, { method: 'POST' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      alert(`Test gestartet für: ${mr.title}`)
+    } catch (err) {
+      alert(`Fehler beim Test: ${err.message}`)
+    }
+  }
+
   useEffect(() => {
     fetch(API_URL)
       .then((res) => {
@@ -33,16 +53,12 @@ function App() {
 
       {!loading && !error && (
         <div className="mr-list">
-          <div className="mr-actions">
-            <button className="btn btn-primary">Version erstellen</button>
-            <button className="btn btn-secondary">Test</button>
-          </div>
-
           <table>
             <thead>
               <tr>
                 <th>Title</th>
                 <th>Source Branch</th>
+                <th>Aktionen</th>
               </tr>
             </thead>
             <tbody>
@@ -50,6 +66,10 @@ function App() {
                 <tr key={mr.id} data-id={mr.id}>
                   <td><a href={mr.web_url} target="_blank" rel="noopener noreferrer">{mr.title}</a></td>
                   <td><code>{mr.source_branch}</code></td>
+                  <td className="row-actions">
+                    <button className="btn btn-primary btn-sm" onClick={() => triggerBuild(mr)}>Version erstellen</button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => startTest(mr)}>Test</button>
+                  </td>
                 </tr>
               ))}
             </tbody>

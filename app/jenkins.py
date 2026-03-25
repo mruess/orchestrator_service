@@ -16,6 +16,7 @@ def trigger_build(branch_name, quartals_version="false"):
             "BRANCH_NAME": branch_name,
             "QUARTALS_VERSION": quartals_version,
         },
+        verify=False,
     )
     response.raise_for_status()
     return response.status_code

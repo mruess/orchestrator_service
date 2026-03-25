@@ -17,10 +17,9 @@ h1 {
   width: 100%;
 }
 
-.mr-actions {
+.row-actions {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 8px;
 }
 
 .btn {
@@ -48,6 +47,11 @@ h1 {
 
 .btn-secondary:hover {
   background: #388e3c;
+}
+
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 13px;
 }
 
 table {
