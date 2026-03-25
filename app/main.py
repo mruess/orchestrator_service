@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.pool import allocate_vm, release_vm
 from app.ansible_runner import run_playbook
 from app.gitlab import get_merge_requests
+from app.jenkins import trigger_build
 
 app = FastAPI()
 
@@ -24,3 +25,8 @@ def release(vm: str, mr_id: int):
     run_playbook(vm, mr_id,"playbook_stopvm.yml")
     release_vm(vm)
     return {"status": "released"}
+
+@app.post("/trigger-build")
+def trigger_build_endpoint(branch_name: str, quartals_version: str = "false"):
+    status_code = trigger_build(branch_name, quartals_version)
+    return {"status": "triggered", "jenkins_status_code": status_code}
