@@ -53,3 +53,18 @@ Merge Requests abfragen
 ```
 curl http://127.0.0.1:8000/merge-requests
 ```
+
+Build auf Jenkins triggern
+
+```
+curl -X POST "http://127.0.0.1:8000/trigger-build?branch_name=develop"
+```
+
+benötigtes Environment für Jenkins (mit passendem User und Token ändern):
+
+export JENKINS_USER="mruess"
+export JENKINS_TOKEN="xxxxxxxxx" 
+
+für gitlab (gitlab hat momentan immer den user Michael)
+
+export GITLAB_TOKEN="xxxxxxxx"
