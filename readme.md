@@ -60,11 +60,8 @@ Build auf Jenkins triggern
 curl -X POST "http://127.0.0.1:8000/trigger-build?branch_name=develop"
 ```
 
-benötigtes Environment für Jenkins (mit passendem User und Token ändern):
+## benötigtes Environment für Jenkins und Gitlab
+in /.env befinden sich die Secrets, diese Datei ist .gitignore und darf NICHT!!! comitted werden
+Diese env Variblen werden beim Start von Docker oder des DevContainers automatisch geladen
+ein Beispiel ist in .env.example
 
-export JENKINS_USER="mruess"
-export JENKINS_TOKEN="xxxxxxxxx" 
-
-für gitlab (gitlab hat momentan immer den user Michael)
-
-export GITLAB_TOKEN="xxxxxxxx"
