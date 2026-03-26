@@ -3,7 +3,24 @@
 Der Container selbst macht beim PostCreate "pip install -r requirements.txt", deshalb bei Erweiterungen einfach die requirements.txt ändern.
 
 ## Setup
-In copilot /setup eingeben. Er fragt nach dem Vault Passwort und startet den Dev-Server. Dieser kann mit den Curl-Kommandos unten angesprochen werden
+In copilot /setup eingeben. Dabei werden die Dev-Server (node und python). Dieser kann mit den Curl-Kommandos unten angesprochen werden
+
+## manuelles Setup
+
+- die secrets stehen in /.env und werden automatisch beim Start des Containers geladen. Ist die Datei nicht vorhanden gibt es ein Beispiel 
+- prüfen ob die Secrets geladen sind z.b. mit `echo $GITLAB_TOKEN`
+
+Python Service zuerst starten
+```
+uvicorn app.main:app --reload
+```
+
+dann Node
+```
+npm run dev
+```
+
+
 
 ## ansible
 Ansible wird bereits mit dem Devcontainer PostCreate installiert, mehr dazu in dem Unterverzeichnis **ansible**
@@ -17,11 +34,7 @@ Passiert gerne bei DevContainern. WICHTIG chmod ist Käse weil dann VScode selbs
 ansible-playbook -i inventory/ playbook-snapshot.yml --vault-password-file ./vault-pass.sh
 ```
 
-Vault Passwort setzten: 
-
-```
-export ANSIBLE_VAULT_PASSWORD=
-```
+Vault Passwort ist in der .env Datei gesetzt die automatisch im Container geladen wird
 
 Wird vergessen das Vault-Passwort vorher zu setzen dann kommt der Fehler:
 [ERROR]: Invalid vault password was provided from script (/workspaces/orchestrator_service/ansible/vault-pass.sh)
