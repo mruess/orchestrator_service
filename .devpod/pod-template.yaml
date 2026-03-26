@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: devpod
+      envFrom:
+        - secretRef:
+            name: orchestrator-env
