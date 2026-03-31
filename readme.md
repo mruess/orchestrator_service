@@ -14,8 +14,7 @@ Python Service zuerst starten
 ```
 uvicorn app.main:app --reload
 ```
-
-dann Node
+und im Verzeichnis "frontend"
 ```
 npm run dev
 ```

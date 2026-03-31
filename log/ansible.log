@@ -1,0 +1,2 @@
+[WARNING]: Error in vault password file loading (default): Problem running vault password script /workspaces/orchestratorservice/ansible/vault-pass.sh ([Errno 2] No such file or directory: '/workspaces/orchestratorservice/ansible/vault-pass.sh'). If this is not a script, remove the executable bit from the file.
+[ERROR]: Problem running vault password script /workspaces/orchestratorservice/ansible/vault-pass.sh ([Errno 2] No such file or directory: '/workspaces/orchestratorservice/ansible/vault-pass.sh'). If this is not a script, remove the executable bit from the file.

@@ -3,23 +3,17 @@
     path: C:\temp
     state: directory
 
-- name: Upload build artifact
-  ansible.windows.win_copy:
-    src: "{{ build_artifact }}"
-    dest: "C:\\temp\\build.zip"
+- name: Setup kopieren
+  ansible.windows.win_command: >
+    curl -L -o "c:\temp\setup-al.zip"  "http://192.168.0.224:8081/artifactory/ui/artifactactions/downloadfolder?repoKey=dataal-dev-generic-local&path=data/develop/Install-Build-499&archiveType=zip&includeChecksumFiles=false"
+  
+- name: Setup entpacken
+  ansible.windows.win_command: >
+    powershell -Command "Expand-Archive -Path 'c:\temp\setup-al.zip' -DestinationPath 'c:\temp\setup-al' -Force"
 
-- name: Clean target folder
-  ansible.windows.win_file:
-    path: C:\LegacyApp\data
-    state: absent
+- name: Setup installieren
+  ansible.windows.win_package:
+    path: C:\temp\setup-al\setup.exe
+    arguments: /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
+    expected_return_code: [0, 3010]
 
-- name: Recreate target folder
-  ansible.windows.win_file:
-    path: C:\LegacyApp\data
-    state: directory
-
-- name: Unzip build
-  ansible.windows.win_unzip:
-    src: "C:\\temp\\build.zip"
-    dest: "C:\\LegacyApp\\data"
-    delete_archive: yes

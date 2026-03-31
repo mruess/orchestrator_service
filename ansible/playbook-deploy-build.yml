@@ -1,0 +1,5 @@
+- name: Deploy build to test system
+  hosts: all
+  gather_facts: no
+  roles:
+    - deploy_build
