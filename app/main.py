@@ -18,13 +18,18 @@ def merge_requests():
 def start_test(user: str, mr_id: int):
     vm = allocate_vm(user, mr_id)
     run_playbook(vm, mr_id,"playbook_startvm.yml")
-    return {"vm": vm, "status": "DEPLOYING"}
+    return {"vm": vm, "status": "starting vm"}
 
 @app.post("/release")
 def release(vm: str, mr_id: int):
     run_playbook(vm, mr_id,"playbook_stopvm.yml")
     release_vm(vm)
     return {"status": "released"}
+
+@app.post("/deploy-build")
+def deploy_build(vm: str, mr_id: int):
+    run_playbook(vm, mr_id, "playbook-deploy-build.yml")
+    return {"vm": vm, "status": "DEPLOYING"}
 
 @app.post("/trigger-build")
 def trigger_build_endpoint(branch_name: str, quartals_version: str = "false"):
