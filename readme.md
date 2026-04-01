@@ -72,6 +72,12 @@ Letzter erfolgreicher Build (über alle Branches)
 curl http://127.0.0.1:8000/last-successful-build
 ``` 
 
+Letzer Build von Branch
+
+```
+ curl http://127.0.0.1:8000/last-build-for-branch?branch_name=develop
+```
+
 Build auf Jenkins triggern
 
 ```

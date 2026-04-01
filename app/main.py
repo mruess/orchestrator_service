@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.pool import allocate_vm, release_vm
 from app.ansible_runner import run_playbook
 from app.gitlab import get_merge_requests
-from app.jenkins import trigger_build, get_last_successful_build
+from app.jenkins import trigger_build, get_last_successful_build, get_last_build_for_branch
 
 app = FastAPI()
 
@@ -40,3 +40,7 @@ def trigger_build_endpoint(branch_name: str, quartals_version: str = "false"):
 def last_successful_build():
     description = get_last_successful_build()
     return {"description": description}
+
+@app.get("/last-build-for-branch")
+def last_build_for_branch(branch_name: str):
+    return get_last_build_for_branch(branch_name)

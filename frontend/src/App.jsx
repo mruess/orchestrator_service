@@ -8,6 +8,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [lastBuild, setLastBuild] = useState(null)
+  const [branchBuilds, setBranchBuilds] = useState({})
 
   const triggerBuild = async (mr) => {
     try {
@@ -46,6 +47,22 @@ function App() {
       .then((data) => {
         setMergeRequests(data)
         setLoading(false)
+
+        const branches = [...new Set(data.map((mr) => mr.source_branch))]
+        Promise.all(
+          branches.map((branch) =>
+            fetch(`/api/last-build-for-branch?branch_name=${encodeURIComponent(branch)}`)
+              .then((res) => res.ok ? res.json() : null)
+              .then((build) => [branch, build])
+              .catch(() => [branch, null])
+          )
+        ).then((results) => {
+          const builds = {}
+          for (const [branch, build] of results) {
+            if (build) builds[branch] = build
+          }
+          setBranchBuilds(builds)
+        })
       })
       .catch((err) => {
         setError(err.message)
@@ -74,6 +91,7 @@ function App() {
               <tr>
                 <th>Title</th>
                 <th>Source Branch</th>
+                <th>Letzter Build</th>
                 <th>Aktionen</th>
               </tr>
             </thead>
@@ -82,6 +100,7 @@ function App() {
                 <tr key={mr.id} data-id={mr.id}>
                   <td><a href={mr.web_url} target="_blank" rel="noopener noreferrer">{mr.title}</a></td>
                   <td><code>{mr.source_branch}</code></td>
+                  <td>{branchBuilds[mr.source_branch] ? `${new Date(branchBuilds[mr.source_branch].buildTime).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })} — ${branchBuilds[mr.source_branch].installer}` : '–'}</td>
                   <td className="row-actions">
                     <button className="btn btn-primary btn-sm" onClick={() => triggerBuild(mr)}>Version erstellen</button>
                     <button className="btn btn-secondary btn-sm" onClick={() => startTest(mr)}>Test</button>
