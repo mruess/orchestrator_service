@@ -7,6 +7,7 @@ function App() {
   const [mergeRequests, setMergeRequests] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [lastBuild, setLastBuild] = useState(null)
 
   const triggerBuild = async (mr) => {
     try {
@@ -29,6 +30,14 @@ function App() {
   }
 
   useEffect(() => {
+    fetch('/api/last-successful-build')
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
+      .then((data) => setLastBuild(data))
+      .catch(() => setLastBuild(null))
+
     fetch(API_URL)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -47,6 +56,13 @@ function App() {
   return (
     <div className="app">
       <h1>Orchestrator</h1>
+
+      {lastBuild && (
+        <div className="card last-build-card">
+          <h2>Letzter erfolgreicher Build</h2>
+          <p>{lastBuild.description}</p>
+        </div>
+      )}
 
       {loading && <p>Lade Merge Requests…</p>}
       {error && <p className="error">Fehler: {error}</p>}

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.pool import allocate_vm, release_vm
 from app.ansible_runner import run_playbook
 from app.gitlab import get_merge_requests
-from app.jenkins import trigger_build
+from app.jenkins import trigger_build, get_last_successful_build
 
 app = FastAPI()
 
@@ -35,3 +35,8 @@ def deploy_build(vm: str, mr_id: int):
 def trigger_build_endpoint(branch_name: str, quartals_version: str = "false"):
     status_code = trigger_build(branch_name, quartals_version)
     return {"status": "triggered", "jenkins_status_code": status_code}
+
+@app.get("/last-successful-build")
+def last_successful_build():
+    description = get_last_successful_build()
+    return {"description": description}

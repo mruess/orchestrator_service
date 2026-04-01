@@ -20,3 +20,17 @@ def trigger_build(branch_name, quartals_version="false"):
     )
     response.raise_for_status()
     return response.status_code
+
+
+def get_last_successful_build():
+    user = os.environ["JENKINS_USER"]
+    token = os.environ["JENKINS_TOKEN"]
+
+    response = requests.get(
+        f"{JENKINS_URL}/job/{JOB_NAME}/lastSuccessfulBuild/api/json",
+        auth=(user, token),
+        verify=False,
+    )
+    response.raise_for_status()
+    data = response.json()
+    return data.get("description")
