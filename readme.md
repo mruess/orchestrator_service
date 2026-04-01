@@ -66,6 +66,12 @@ Merge Requests abfragen
 curl http://127.0.0.1:8000/merge-requests
 ```
 
+Letzter erfolgreicher Build (über alle Branches)
+
+```
+curl http://127.0.0.1:8000/last-successful-build
+``` 
+
 Build auf Jenkins triggern
 
 ```
