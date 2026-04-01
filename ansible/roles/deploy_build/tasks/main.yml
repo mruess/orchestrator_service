@@ -5,7 +5,7 @@
 
 - name: Setup kopieren
   ansible.windows.win_command: >
-    curl -L -o "c:\temp\setup-al.zip"  "http://192.168.0.224:8081/artifactory/ui/artifactactions/downloadfolder?repoKey=dataal-dev-generic-local&path=data/{{ branch_name }}/Install-Build-499&archiveType=zip&includeChecksumFiles=false"
+    curl -L -o "c:\temp\setup-al.zip"  "http://192.168.0.224:8081/artifactory/ui/artifactactions/downloadfolder?repoKey=dataal-dev-generic-local&path=data/{{ branch_name }}/Install-Build&archiveType=zip&includeChecksumFiles=false"
   
 - name: Setup entpacken
   ansible.windows.win_command: >

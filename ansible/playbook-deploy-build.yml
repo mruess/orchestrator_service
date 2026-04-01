@@ -1,3 +1,9 @@
+- name: Rollback VM to snapshot and wait for WinRM
+  hosts: all
+  gather_facts: no
+  roles:
+    - vm_reset
+
 - name: Start VM
   hosts: all
   gather_facts: no
