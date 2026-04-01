@@ -27,8 +27,8 @@ def release(vm: str, mr_id: int):
     return {"status": "released"}
 
 @app.post("/deploy-build")
-def deploy_build(vm: str, mr_id: int):
-    run_playbook(vm, mr_id, "playbook-deploy-build.yml")
+def deploy_build(vm: str, mr_id: int, branch_name: str):
+    run_playbook(vm, mr_id, "playbook-deploy-build.yml", extra_vars={"branch_name": branch_name})
     return {"vm": vm, "status": "DEPLOYING"}
 
 @app.post("/trigger-build")
