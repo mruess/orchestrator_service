@@ -9,6 +9,7 @@ function App() {
   const [error, setError] = useState(null)
   const [lastBuild, setLastBuild] = useState(null)
   const [branchBuilds, setBranchBuilds] = useState({})
+  const [vmIps, setVmIps] = useState({})
 
   const triggerBuild = async (mr) => {
     try {
@@ -22,9 +23,15 @@ function App() {
 
   const startTest = async (mr) => {
     try {
-      const res = await fetch(`/api/start-test?mr_id=${mr.iid}`, { method: 'POST' })
+      const res = await fetch(`/api/deploy-build?user=${encodeURIComponent(mr.author.username)}&branch_name=${encodeURIComponent(mr.source_branch)}`, { method: 'POST' })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      alert(`Test gestartet für: ${mr.title}`)
+        const data = await res.json()
+      const hostRes = await fetch(`/api/ansiblehost?name=${encodeURIComponent(data.vm)}`)
+      if (hostRes.ok) {
+        const hostData = await hostRes.json()
+        setVmIps((prev) => ({ ...prev, [mr.source_branch]: { vm: data.vm, ip: hostData.target_ip } }))
+      }
+      alert(`Test gestartet für: ${mr.title} auf ${data.vm}`)
     } catch (err) {
       alert(`Fehler beim Test: ${err.message}`)
     }
@@ -38,6 +45,22 @@ function App() {
       })
       .then((data) => setLastBuild(data))
       .catch(() => setLastBuild(null))
+
+    fetch('/api/pool')
+      .then((res) => res.ok ? res.json() : {})
+      .then(async (pool) => {
+        const entries = Object.entries(pool).filter(([, data]) => data.status === 'IN_USE')
+        const resolved = {}
+        await Promise.all(entries.map(async ([vm, data]) => {
+          try {
+            const hostRes = await fetch(`/api/ansiblehost?name=${encodeURIComponent(vm)}`)
+            const hostData = hostRes.ok ? await hostRes.json() : {}
+            resolved[data.branch] = { vm, ip: hostData.target_ip || '–' }
+          } catch { /* ignore */ }
+        }))
+        setVmIps(resolved)
+      })
+      .catch(() => {})
 
     fetch(API_URL)
       .then((res) => {
@@ -92,6 +115,7 @@ function App() {
                 <th>Title</th>
                 <th>Source Branch</th>
                 <th>Letzter Build</th>
+                <th>VM / IP</th>
                 <th>Aktionen</th>
               </tr>
             </thead>
@@ -101,9 +125,22 @@ function App() {
                   <td><a href={mr.web_url} target="_blank" rel="noopener noreferrer">{mr.title}</a></td>
                   <td><code>{mr.source_branch}</code></td>
                   <td>{branchBuilds[mr.source_branch] ? `${new Date(branchBuilds[mr.source_branch].buildTime).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })} — ${branchBuilds[mr.source_branch].installer}` : '–'}</td>
+                  <td>{vmIps[mr.source_branch] ? `${vmIps[mr.source_branch].vm} (${vmIps[mr.source_branch].ip})` : '–'}</td>
                   <td className="row-actions">
                     <button className="btn btn-primary btn-sm" onClick={() => triggerBuild(mr)}>Version erstellen</button>
-                    <button className="btn btn-secondary btn-sm" onClick={() => startTest(mr)}>Test</button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => startTest(mr)}>Test starten</button>
+                    {vmIps[mr.source_branch] && (
+                      <button className="btn btn-sm" style={{background:'#d32f2f',color:'#fff'}} onClick={async () => {
+                        try {
+                          const res = await fetch(`/api/release?vm=${encodeURIComponent(vmIps[mr.source_branch].vm)}`, { method: 'POST' })
+                          if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                          setVmIps((prev) => { const next = { ...prev }; delete next[mr.source_branch]; return next })
+                          alert(`VM ${vmIps[mr.source_branch].vm} freigegeben`)
+                        } catch (err) {
+                          alert(`Fehler beim Release: ${err.message}`)
+                        }
+                      }}>Release</button>
+                    )}
                   </td>
                 </tr>
               ))}

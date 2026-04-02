@@ -11,14 +11,14 @@ def save_pool(pool):
     with open(POOL_FILE, "w") as f:
         json.dump(pool, f, indent=2)
 
-def allocate_vm(user, mr_id):
+def allocate_vm(user, branch_name):
     pool = load_pool()
     for vm, data in pool.items():
         if data["status"] == "FREE":
             pool[vm] = {
                 "status": "IN_USE",
                 "user": user,
-                "mr": mr_id
+                "branch": branch_name
             }
             save_pool(pool)
             return vm

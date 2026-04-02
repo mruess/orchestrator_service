@@ -19,6 +19,8 @@ und im Verzeichnis "frontend"
 npm run dev
 ```
 
+Wenn npm im devcontainer meckert dass 
+
 
 
 ## ansible
@@ -48,10 +50,10 @@ uvicorn app.main:app --reload
 
 ## 🌐 API testen
 
-Start Test
+Start Test_VM, letztes Setup aus diesem Branch wird installiert
 
 ```
-curl -X POST "http://127.0.0.1:8000/start-test?user=max&mr_id=123"
+curl -X POST "http://127.0.0.1:8000/start-test?user=max&branch_name=quartal-26-2"
 ```
 
 Release VM

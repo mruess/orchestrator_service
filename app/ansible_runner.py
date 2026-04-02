@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-def run_playbook(vm, mr_id, playbook="playbook.yml", extra_vars=None):
+def run_playbook(vm, playbook="playbook.yml", extra_vars=None):
     log_dir = os.path.join(os.path.dirname(__file__), "..", "log")
     os.makedirs(log_dir, exist_ok=True)
     log_path = os.path.join(log_dir, "ansible.log")
@@ -11,7 +11,6 @@ def run_playbook(vm, mr_id, playbook="playbook.yml", extra_vars=None):
         "-i", "inventory/",
         "--vault-password-file", "./vault-pass.sh",
         "-l", vm,
-        "-e", f"mr_id={mr_id}"
     ]
     if extra_vars:
         for key, value in extra_vars.items():

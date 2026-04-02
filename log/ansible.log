@@ -1,2 +1,373 @@
 [WARNING]: Error in vault password file loading (default): Problem running vault password script /workspaces/orchestratorservice/ansible/vault-pass.sh ([Errno 2] No such file or directory: '/workspaces/orchestratorservice/ansible/vault-pass.sh'). If this is not a script, remove the executable bit from the file.
 [ERROR]: Problem running vault password script /workspaces/orchestratorservice/ansible/vault-pass.sh ([Errno 2] No such file or directory: '/workspaces/orchestratorservice/ansible/vault-pass.sh'). If this is not a script, remove the executable bit from the file.
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=2    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-02 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-02 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-02]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-02]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-02]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-02]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-02]
+
+PLAY RECAP *********************************************************************
+win-test-02                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-02 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-02                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-01]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-01]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-01]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[ERROR]: Task failed: HTTPConnectionPool(host='192.168.0.221', port=5985): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.0.221', port=5985) at 0x7f5c62d20e10>, 'Connection to 192.168.0.221 timed out. (connect timeout=30)'))
+
+Task failed.
+Origin: /workspaces/orchestratorservice/ansible/roles/deploy_build/tasks/main.yml:14:3
+
+12     powershell -Command "Expand-Archive -Path 'c:\temp\setup-al.zip' -DestinationPath 'c:\temp\setup-al' -Force"
+13
+14 - name: Setup installieren
+     ^ column 3
+
+<<< caused by >>>
+
+HTTPConnectionPool(host='192.168.0.221', port=5985): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.0.221', port=5985) at 0x7f5c62d20e10>, 'Connection to 192.168.0.221 timed out. (connect timeout=30)'))
+
+fatal: [win-test-01]: FAILED! => {"changed": false, "msg": "Task failed: HTTPConnectionPool(host='192.168.0.221', port=5985): Max retries exceeded with url: /wsman (Caused by ConnectTimeoutError(<HTTPConnection(host='192.168.0.221', port=5985) at 0x7f5c62d20e10>, 'Connection to 192.168.0.221 timed out. (connect timeout=30)'))"}
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=6    changed=4    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-01]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: community.general.proxmox_snap has been deprecated. The proxmox content has been moved to community.proxmox. This feature will be removed from collection 'community.general' version 15.0.0.
+
+PLAY [Rollback VM to snapshot and wait for WinRM] ******************************
+
+TASK [vm_reset : Rollback VM to clean-base snapshot] ***************************
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY [Start VM] ****************************************************************
+
+TASK [start_vm : Start VM] *****************************************************
+changed: [win-test-01 -> localhost]
+
+PLAY [Wait for VM to be ready] *************************************************
+
+TASK [Wait for WinRM connection] ***********************************************
+ok: [win-test-01]
+
+PLAY [Deploy build to test system] *********************************************
+
+TASK [deploy_build : Ensure temp dir exists] ***********************************
+ok: [win-test-01]
+
+TASK [deploy_build : Setup kopieren] *******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup entpacken] ******************************************
+changed: [win-test-01]
+
+TASK [deploy_build : Setup installieren] ***************************************
+changed: [win-test-01]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [Stop VM] *****************************************************************
+
+TASK [stop_vm : Stop VM] *******************************************************
+[WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+[DEPRECATION WARNING]: The connection setting `validate_certs` was not provided and defaults to `false`. This default will change to `true` inin community.proxmox 2.0.0. This feature will be removed from collection 'community.proxmox' version 2.0.0.
+changed: [win-test-01 -> localhost]
+
+PLAY RECAP *********************************************************************
+win-test-01                : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
