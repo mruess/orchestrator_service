@@ -91,3 +91,24 @@ in /.env befinden sich die Secrets, diese Datei ist .gitignore und darf NICHT!!!
 Diese env Variblen werden beim Start von Docker oder des DevContainers automatisch geladen
 ein Beispiel ist in .env.example
 
+
+## Container erstellen
+
+```
+docker build -t ghcr.io/mruess/orchestrator-backend:latest .
+```
+
+An der Container Registry anmelden
+
+```
+echo $GITHUB_TOKEN | docker login ghcr.io -u mruess --password-stdin
+```
+
+Image pushen
+
+```
+docker push ghcr.io/mruess/orchestrator-backend:latest
+```
+
+
+
