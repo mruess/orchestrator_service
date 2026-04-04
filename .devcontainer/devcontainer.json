@@ -8,7 +8,9 @@
         "ghcr.io/devcontainers/features/node:1": {
             "version": "22"
         },
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "moby": false
+        }
     },
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
