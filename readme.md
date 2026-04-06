@@ -94,20 +94,23 @@ ein Beispiel ist in .env.example
 
 ## Container erstellen
 
-```
-docker build -t ghcr.io/mruess/orchestrator-backend:latest .
-```
-
 An der Container Registry anmelden
 
 ```
 echo $GITHUB_TOKEN | docker login ghcr.io -u mruess --password-stdin
 ```
 
+Container builden
+
+```
+docker build -t ghcr.io/mruess/orchestrator-app:latest .
+```
+evtl mit --no-cache
+
 Image pushen
 
 ```
-docker push ghcr.io/mruess/orchestrator-backend:latest
+docker push ghcr.io/mruess/orchestrator-app:latest
 ```
 
 
