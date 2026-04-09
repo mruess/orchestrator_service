@@ -1,0 +1,49 @@
+# k8s/base/frontend-deployment.yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: orchestrator  
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator-frontend
+  namespace: orchestrator 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orchestrator-frontend
+  template:
+    metadata:
+      labels:
+        app: orchestrator-frontend
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: orchestrator-frontend
+          image: ghcr.io/mruess/orchestrator-frontend:v1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+# k8s/base/frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-frontend
+  namespace: orchestrator
+spec:
+  selector:
+    app: orchestrator-frontend
+  ports:
+    - port: 80
+      targetPort: 80
