@@ -19,7 +19,29 @@ und im Verzeichnis "frontend"
 npm run dev
 ```
 
-Wenn npm im devcontainer meckert dass 
+Wenn npm im devcontainer meckert dass es vite nicht findet dann muss man es mit npm install vite nochmal drauf tun...
+
+## Container erstellen
+
+An der Container Registry anmelden
+
+```
+echo $GITHUB_TOKEN | docker login ghcr.io -u mruess --password-stdin
+```
+
+Container builden
+
+```
+docker build -t ghcr.io/mruess/orchestrator-app:latest .
+```
+evtl mit --no-cache
+
+Image pushen
+
+```
+docker push ghcr.io/mruess/orchestrator-app:latest
+```
+
 
 
 
